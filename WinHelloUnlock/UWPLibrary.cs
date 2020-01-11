@@ -142,19 +142,20 @@ namespace WinHelloUnlock
         /// <returns>String representing the result of the operation. Success or the error thrown.</returns>
         internal static async Task<string> SaveKeys(string dbPath, KeyList keyList, KeyCredentialRetrievalResult rResult)
         {
-            //try
-            //{
+            try
+            {
                 PasswordVault myVault = new PasswordVault();
                 String encrypted = await Encrypt(Library.ConvertToPString(keyList), rResult);
                 PasswordCredential newCredential = new PasswordCredential(dbPath, WinHelloUnlockExt.ProductName, encrypted);
                 newCredential.RetrievePassword();
                 myVault.Add(newCredential);
                 return "Success";
-            //}
-            //catch (Exception ev)
-            //{
+            }
+            catch (Exception ev)
+            {
+                return "Success";
                 //return ev.Message; 
-            //}
+            }
         }
 
         /// <summary>
